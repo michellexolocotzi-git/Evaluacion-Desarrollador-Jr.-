@@ -1,0 +1,211 @@
+<div class="toolbar" role="banner">
+  <img
+    width="40"
+    alt="Angular Logo"
+    src="assets/img/logo_fmf.png"
+  />
+  <span>Evaluación Desarrollador Jr.</span>
+    <div class="spacer"></div>
+</div>
+
+<div class="content" role="main">
+  <div fxLayout="column">
+    <div fxFlex="100">
+      <strong>Bienvenido a tu prueba de Desarrollador Jr. de la Federación Mexicana de Fútbol.</strong>
+    </div>
+    <div fxFlex="100" class="pt-10">
+      Estas son las actividades que debes realizar:
+    </div>
+    <div fxFlex="100" class="pt-10">
+      <ol>
+        <li>
+          Utilizar Angular 7 o superior.
+        </li>
+        <li>
+          Instalar la librería ng-wizard <a href="https://www.npmjs.com/package/ng-wizard" target="_blank">https://www.npmjs.com/package/ng-wizard</a> para crear un componente por pasos.
+        </li>
+        <li>
+          En el <strong>primer paso</strong> debes mostrar un formulario de datos generales con la siguiente información:
+          <div fxLayout="column">
+            <div fxFlex="100" class="pt-10">
+              <ul>
+                <li>Nombre</li>
+                <li>Apellido Paterno</li>
+                <li>Apellido Materno</li>
+                <li>Fecha de Nacimiento (Con un campo de selección de fecha)</li>
+                <li>Género *</li>
+                <li>Nacionalidad *</li>
+                <li>Club de Fútbol *</li>
+                <li>R.F.C. **</li>
+                <li>Ocupación</li>
+                <li>Botón para enviar información</li>
+              </ul>
+            </div>
+            
+            <div fxFlex="100" class="pt-10">
+              * Estas opciones deben alimentarse de manera dinámica utilizando los <strong>JSON</strong> que se encuentran en la carpeta <strong>"data"</strong>, también se requiere crear los modelos de datos y guardarlos en la carpeta <strong>"models"</strong>
+            </div>
+            <div fxFlex="100" class="pt-10">
+              ** Este campo solo debe aparecer si el registro que se captura es de alguien mayor a 18 años, en caso que lo sea, validar la estructura del R.F.C. antes de enviar la información
+            </div>
+          </div>
+        </li>
+        <li>
+          <div fxLayout="column">
+            <div fxFlex="100">
+              Utilizando la información capturada en el formulario, dentro del <strong>paso dos</strong> mostrar una ficha similar a la siguiente (<strong>Se tomará en cuenta el diseño implementado</strong>):
+            </div>
+            <div fxFlex="100">
+              <img src="assets/img/id-example.png">
+            </div>
+          </div>
+        </li>
+        <li>
+          Instalar la librería <a href="https://www.npmjs.com/package/jspdf" target="_blank">https://www.npmjs.com/package/jspdf</a> para crear PDF.
+        </li>
+        <li>
+          En el <strong>tercer paso</strong> del componente, desplegar la misma información del formulario del <strong>primer paso</strong> en un PDF.
+        </li>
+        <li>
+          Una vez hayas concluido tu evaluación, debes subirlo a tu propio repositorio de <strong>GitHub</strong> o <strong>GitLab</strong> y enviar el link para su revisión.
+        </li>
+      </ol>
+    </div>
+    
+  </div>
+  
+</div>
+
+<app-progress>
+  <app-progress-step>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+	      <div class="row">      	
+	        <div class="col-md-12 mt-5">
+            <h2>{{ titulo }} </h2>
+	        <form [formGroup]="contacto" (ngSubmit)="onSubmit()">
+	          	  <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                        <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                            <div *ngIf="f.nombre.errors.required">Por favor, ingresa tu Nombre</div>
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                      <br>
+                      <div class="form-group">
+                        <label>Apellido Paterno</label>
+                        <input type="text" formControlName="paterno" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.paterno.errors }" />
+                        <div *ngIf="submitted && f.paterno.errors" class="invalid-feedback">
+                            <div *ngIf="f.paterno.errors.required">Por favor, ingresa tu Nombre</div>
+                        </div>
+                    </div>  
+                    </div>  
+                    <br>    
+                    <div class="form-group">
+                      <label>Apellido Materno</label>
+                      <input type="text" formControlName="materno" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.materno.errors }" />
+                      <div *ngIf="submitted && f.materno.errors" class="invalid-feedback">
+                          <div *ngIf="f.materno.errors.required">Por favor, ingresa tu Nombre</div>
+                      </div>
+                  </div>  
+                  <br>  
+                  <div class="form-group">
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date" formControlName="ed" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ed.errors }" />
+                    <div *ngIf="submitted && f.ed.errors" class="invalid-feedback">
+                        <div *ngIf="f.ed.errors.required">Por favor, ingresa tu Fecha de nacimiento</div>
+                    </div>
+                </div>  
+                <br>             
+                    <div class="form-group">
+                        <label>Genero</label>
+                        <input type="text" formControlName="genero" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.genero.errors }" />
+                        <div *ngIf="submitted && f.genero.errors" class="invalid-feedback">
+                            <div *ngIf="f.genero.errors.required">Por favor, ingresa Genero</div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+          					    <label for="nac"> Nacionalidad</label>
+          					    <select class="form-control" formControlName="nac" [ngClass]="{ 'is-invalid': submitted && f.nac.errors }">
+          					      <option value="">Seleccionar</option>
+          					      <option value="Mexicano">Mexicano</option>
+          						  <option value="Argentina">Argentina de Fresa</option>
+          					      <option value="Inglesa">Inglesa</option>
+          						  <option value="Estadounidense">Estadounidense</option>
+          					      <option value="Otro">Otro</option>				      
+          					      
+          					    </select>
+          					    <div *ngIf="submitted && f.nac.errors" class="invalid-feedback">
+                            <div *ngIf="f.nac.errors.required">Por favor, Selecciona Nacionalidad</div>
+                        </div>
+          					</div>
+                    <br>
+                    <div class="form-group">
+                      <label for="club"> Club de Fútbol</label>
+                      <select class="form-control" formControlName="club" [ngClass]="{ 'is-invalid': submitted && f.club.errors }">
+                        <option value="">Seleccionar</option>
+                        <option value="Santos">Santos</option>
+                      <option value="America">America</option>
+                        <option value="Atlas">Atlas</option>
+                      <option value="Toluca">Toluca</option>
+                        <option value="Otro">Otro</option>				      
+                        
+                      </select>
+                      <div *ngIf="submitted && f.club.errors" class="invalid-feedback">
+                          <div *ngIf="f.club.errors.required">Por favor, Selecciona Nacionalidad</div>
+                      </div>
+                  </div>
+                  <br>
+                    <div class="form-group">
+  					          <label for="rfc">RFC</label>
+  					          <input type="text" class="form-control" formControlName="rfc" rows="3" [ngClass]="{ 'is-invalid': submitted && f.rfc.errors }"/>
+  					          <div *ngIf="submitted && f.rfc.errors" class="invalid-feedback">
+                          <div *ngIf="f.rfc.errors.required">Por favor, ingresa RFC (10 Caracteres mínimo )</div>
+                      </div>
+					          </div>
+                    <br>
+                    <div class="form-group">
+  					          <label for="ocu">Ocupación</label>
+  					          <input type="text" class="form-control" formControlName="ocu" rows="3" [ngClass]="{ 'is-invalid': submitted && f.ocu.errors }"/>
+  					          <div *ngIf="submitted && f.ocu.errors" class="invalid-feedback">
+                          <div *ngIf="f.ocu.errors.required">Por favor, ingresa RFC (10 Caracteres mínimo )</div>
+                      </div>
+					          </div>
+                    <br>
+                    <div class="form-group">
+                      <button class="btn btn-primary" type="button" >Enviar</button>
+                      <button class="btn btn-secondary" progressStepNext type="button">Siguiente</button>
+                      </div>
+                  </form>
+	      </div>
+</div>
+
+
+  </app-progress-step>
+  <app-progress-step>
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Credencial FMF</h5>
+        <p class="card-text">Nombre:</p>
+        <p class="card-text">Apellido Paterno:</p>
+        <p class="card-text">Apellido Materno: </p>
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+    <button class="btn btn-primary" type="button" progressStepPrev>Regresar</button>
+    <button class="btn btn-secondary" type="button" progressStepNext>Siguiente</button>
+  </div>
+  </app-progress-step>
+  <app-progress-step>
+    <div>
+    <button class="btn btn-warning" type="button" (click)="descarga()">Descargar PDF</button>
+  </div>
+  <br>
+    <button class="btn btn-primary" type="button" progressStepPrev>Regresar</button>
+    <button class="btn btn-secondary" type="button" progressStepNext>Finalizado</button>
+  </app-progress-step>
+</app-progress>
